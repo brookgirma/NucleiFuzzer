@@ -94,11 +94,11 @@ output_file="output/allurls.yaml"
 # Step 2: Get the vulnerable parameters based on user input
 if [ -n "$domain" ]; then
     echo "Running ParamSpider on $domain"
-    python3 "$home_dir/ParamSpider/paramspider.py" -d "$domain" --exclude "$excluded_extentions" --level high --quiet -o "output/$domain.yaml"
+    python "$home_dir/ParamSpider/paramspider.py" -d "$domain" --exclude "$excluded_extentions" --level high --quiet -o "output/$domain.yaml"
 elif [ -n "$filename" ]; then
     echo "Running ParamSpider on URLs from $filename"
     while IFS= read -r line; do
-        python3 "$home_dir/ParamSpider/paramspider.py" -d "$line" --exclude "$excluded_extentions" --level high --quiet -o "output/${line}.yaml"
+        python "$home_dir/ParamSpider/paramspider.py" -d "$line" --exclude "$excluded_extentions" --level high --quiet -o "output/${line}.yaml"
         cat "output/${line}.yaml" >> "$output_file"  # Append to the combined output file
     done < "$filename"
 fi
